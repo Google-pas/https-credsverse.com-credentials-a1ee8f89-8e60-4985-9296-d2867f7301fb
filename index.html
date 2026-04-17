@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>شهادة صقر حيدر - AI for Gulf</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- إضافة مكتبة html2canvas لتحويل HTML إلى صورة -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    /* --- نفس الـ CSS السابق بالكامل بدون تغيير --- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #09a4a5;
+      --primary-light: #F3FAFA;
+      --primary-border: #C5E3E3;
+      --text: #000;
+      --text-secondary: rgba(0,0,0,0.65);
+      --text-muted: rgba(0,0,0,0.45);
+      --border: rgba(0,0,0,0.07);
+      --bg-layout: #f5f5f5;
+      --link: #1565d8;
+    }
+
+    body {
+      font-family: initial;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--bg-layout);
+      direction: rtl;
+    }
+
+    /* NAV */
+    nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      height: 64px;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+      padding: 0 24px;
+    }
+    .nav-inner {
+      display: flex;
+      width: 100%;
+      max-width: 1152px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .certifier-logo { display: flex; align-items: center; text-decoration: none; }
+
+    /* MAIN */
+    main { display: flex; flex-direction: column; min-height: calc(100vh - 64px); }
+    .main-content {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      background: #f5f5f5;
+      padding: 24px;
+    }
+    .content-wrapper {
+      display: flex;
+      width: 100%;
+      max-width: 1152px;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* CREDENTIAL VIEWER */
+    .credential-viewer-root { width: 100%; }
+    .credential-viewer {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    @media (min-width: 1024px) {
+      .credential-viewer { flex-direction: row; align-items: flex-start; }
+    }
+
+    .credential-frame-wrapper {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    /* حاوية الصورة الجديدة */
+    ..cert-image-container {
+      width: 
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cert-image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      display: block;
+    }
+
+    /* نخفي العنصر الأصلي للشهادة بعد التحويل */
+    #certSourceForCapture {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      visibility: visible; /* يبقى مرئي للـ html2canvas لكن خارج الشاشة */
+      width: 600px; /* عرض ثابت مناسب للالتقاط */
+    }
+
+    .cert-card {
+      background: #fff;
+      border-radius: 4px;
+      padding: 28px 32px;
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      position: relative;
+      direction: rtl;
+    }
+
+    .cert-logo-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .cert-logo-box {
+      background: #1a1a2e;
+      color: #fff;
+      width: 52px;
+      height: 52px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .cert-logo-sub {
+      font-size: 10px;
+      color: var(--text-secondary);
+      direction: rtl;
+    }
+
+    .cert-badge-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .cert-title-main {
+      font-size: 22px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 12px;
+    }
+    .cert-issued-to {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .cert-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 14px;
+    }
+    .cert-body-text {
+      font-size: 11px;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      text-align: justify;
+      direction: rtl;
+    }
+    .cert-divider { border: none; border-top: 1px solid #eee; margin: 14px 0; }
+    .cert-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      direction: rtl;
+    }
+    .cert-date { font-size: 11px; color: var(--text-secondary); text-align: right; }
+    .cert-date span { display: block; font-size: 10px; color: var(--text-muted); }
+    .cert-seal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .cert-seal-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #1a1a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7px;
+      font-weight: 700;
+      color: #1a1a2e;
+      text-align: center;
+      padding: 4px;
+      line-height: 1.3;
+    }
+    .cert-sig { font-size: 10px; color: var(--text-secondary); }
+
+    .cert-bottom-bar {
+      background: #f5f5f5;
+      padding: 6px 16px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      direction: rtl;
+      justify-content: flex-end;
+    }
+
+    /* RIGHT PANEL */
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+    @media (min-width: 1024px) {
+      .right-panel { width: 340px; flex-shrink: 0; }
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    @media (min-width: 768px) {
+      .card { padding: 24px; }
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .recipient-name {
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.3;
+      margin-bottom: 0;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      padding: 10px 20px;
+      min-height: 48px;
+      width: 100%;
+      transition: opacity 0.15s;
+      font-family: inherit;
+      direction: rtl;
+    }
+    .btn:hover { opacity: 0.88; }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary-dark {
+      background: #1a1a2e;
+      color: #fff;
+    }
+    .btn-outline {
+      background: #fff;
+      color: #000;
+      border: 1px solid var(--border);
+    }
+    .btn-link {
+      background: transparent;
+      color: var(--link);
+      border: none;
+      padding: 0;
+      width: auto;
+      min-height: auto;
+      font-size: 14px;
+    }
+
+    .btn-group { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+    .btn-row { display: flex; gap: 12px; }
+    .btn-row .btn { flex: 1; }
+    .btn-icon-only { width: 48px; min-width: 48px; flex: none; padding: 0; }
+
+    /* GOOGLE PAY BUTTON */
+    .btn-gpay {
+      background: #000;
+      color: #fff;
+      border-radius: 6px;
+      width: 100%;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+
+    /* VERIFY CARD */
+    .verify-card { }
+    .verify-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .verify-check { color: var(--primary); font-size: 16px; }
+    .verify-title { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--primary); }
+    .verify-date { font-size: 14px; margin-bottom: 12px; }
+    .verify-date strong { font-weight: 500; }
+    .verify-id { font-size: 12px; color: var(--primary); margin-top: 8px; }
+    .verify-id strong { font-weight: 500; }
+
+    /* PRINTED CERT BANNER */
+    .print-banner {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .print-ribbon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--primary);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 0 0 6px 0;
+      z-index: 2;
+    }
+    .print-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px 0 0;
+      height: 96px;
+      direction: rtl;
+    }
+    .print-text { padding: 16px; }
+    .print-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .print-sub { font-size: 12px; color: var(--text-secondary); }
+    .print-icon {
+      font-size: 28px;
+      color: var(--primary);
+    }
+
+    /* ISSUER */
+    .issuer-name { font-size: 24px; font-weight: 500; }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      color: #fff;
+      padding: 72px 24px 106px;
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      width: 100%;
+      max-width: 1152px;
+    }
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    @media (min-width: 1024px) {
+      .footer-top { flex-direction: row; justify-content: space-between; }
+    }
+    .footer-tagline {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 12px;
+    }
+    .footer-link-section { }
+    .footer-link-title { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+    .footer-link { display: block; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; margin-bottom: 8px; }
+    .footer-link:hover { color: #fff; }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-lang {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-socials { display: flex; gap: 16px; align-items: center; }
+    .footer-social-link { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 18px; }
+    .footer-social-link:hover { color: #fff; }
+    .powered-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* STICKY BOTTOM BAR (mobile) */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      height: 104px;
+      background: #fff;
+      padding: 24px 24px 0;
+      box-shadow: 0 -3px 12px rgba(0,0,0,0.1);
+    }
+
+    /* ICON SVGs inline */
+    svg.icon { width: 1em; height: 1em; fill: currentColor; flex-shrink: 0; }
+
+    /* Report error section */
+    .report-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+    }
+    .report-text { color: var(--text-muted); font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR (كما هي) -->
+<nav>
+  <div class="nav-inner">
+    <a href="https://certifier.io/" target="_blank" class="certifier-logo">
+      <!-- Certifier Logo SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="112" height="30" viewBox="0 0 468.98 112.87">
+        <path d="M135.24 93.43q-11.11 0-19.09-4.72a32.35 32.35 0 0 1-12.27-13.32 43.9 43.9 0 0 1-4.3-19.83 43.86 43.86 0 0 1 4.3-19.82 32.13 32.13 0 0 1 12.27-13.42q8-4.83 19.09-4.83 13.22 0 21.61 6.61t10.59 18.33h-14.79a15.47 15.47 0 0 0-5.87-9.34q-4.41-3.47-11.75-3.46-10.17 0-15.94 6.92t-5.77 19 5.77 19 15.94 6.82q7.35 0 11.75-3.15a14.9 14.9 0 0 0 5.87-8.92h14.79q-2.1 11.34-10.59 17.73t-21.61 6.4M199.04 93.43a28.4 28.4 0 0 1-13.95-3.36 24.26 24.26 0 0 1-9.54-9.44 27.9 27.9 0 0 1-3.46-14.05 30.1 30.1 0 0 1 3.35-14.37 24.8 24.8 0 0 1 9.44-9.78 27.7 27.7 0 0 1 14.27-3.57 26.8 26.8 0 0 1 13.53 3.36 23.63 23.63 0 0 1 9.12 9.21 25.2 25.2 0 0 1 3.36 12.9c0 .77 0 1.58-.11 2.42s0 1.71-.1 2.62h-39.54a13.05 13.05 0 0 0 13.53 13 12.2 12.2 0 0 0 6.81-1.78 11.65 11.65 0 0 0 4.2-4.82h13.63a24.9 24.9 0 0 1-4.93 9 23.7 23.7 0 0 1-8.39 6.29 26.1 26.1 0 0 1-11.22 2.37m.11-43.63a14.12 14.12 0 0 0-8.71 2.83q-3.78 2.73-4.82 8.39h25.9a11.34 11.34 0 0 0-3.77-8.18 12.56 12.56 0 0 0-8.6-3.09ZM285.48 92.12q-8.19 0-13.11-4t-4.93-14.16V26.15h13.42v14h14.11v11.17h-14.11v22.76c0 2.52.53 4.26 1.57 5.24s3 1.37 5.67 1.37h6.5v11.43ZM308.43 32.02a8.68 8.68 0 0 1-6.08-2.2 7.36 7.36 0 0 1-2.31-5.56 7 7 0 0 1 2.31-5.45 8.68 8.68 0 0 1 6.08-2.21 8.3 8.3 0 0 1 6 2.21 6.87 6.87 0 0 1 2.41 5.45 7.2 7.2 0 0 1-2.41 5.56 8.3 8.3 0 0 1-6 2.2m-6.71 60.1v-52h13.43v52ZM328.42 92.12v-40.8h-7.13V40.1h7.13v-6.09q0-9.44 4.72-13.42t13-4h5.83v11.45h-3.67q-3.46 0-4.93 1.36t-1.47 4.61v6.09h31.46v52h-13.47V51.32h-18v40.8Zm38.28-59.47a8.68 8.68 0 0 1-6.08-2.2 7.36 7.36 0 0 1-2.31-5.56 7 7 0 0 1 2.31-5.46 8.68 8.68 0 0 1 6.08-2.21 8.3 8.3 0 0 1 6 2.21 6.86 6.86 0 0 1 2.42 5.45 7.21 7.21 0 0 1-2.44 5.55 8.3 8.3 0 0 1-5.98 2.22M405.45 93.43a28.4 28.4 0 0 1-14-3.36 24.3 24.3 0 0 1-9.48-9.49 27.9 27.9 0 0 1-3.46-14.05 30.1 30.1 0 0 1 3.35-14.37 24.8 24.8 0 0 1 9.43-9.73 27.7 27.7 0 0 1 14.27-3.57 26.8 26.8 0 0 1 13.53 3.36 23.63 23.63 0 0 1 9.12 9.21 25.2 25.2 0 0 1 3.36 12.9c0 .77 0 1.58-.11 2.42s0 1.71-.1 2.62h-39.54a13.05 13.05 0 0 0 13.53 13 12.17 12.17 0 0 0 6.81-1.78 11.65 11.65 0 0 0 4.2-4.82h13.61a24.7 24.7 0 0 1-4.93 9 23.7 23.7 0 0 1-8.39 6.29 26.1 26.1 0 0 1-11.2 2.37m.11-43.63a14.12 14.12 0 0 0-8.71 2.83q-3.78 2.73-4.82 8.39h25.94a11.34 11.34 0 0 0-3.77-8.18 12.56 12.56 0 0 0-8.64-3.09ZM436.57 92.12v-52h11.95l1.26 9.75a21.25 21.25 0 0 1 19.19-11V53h-3.77a21.3 21.3 0 0 0-7.87 1.36 10.83 10.83 0 0 0-5.45 4.72q-1.91 3.35-1.91 9.35v23.7ZM230.15 92.12v-52h12l1.26 9.75a21.22 21.22 0 0 1 19.19-11V53h-3.77a21.3 21.3 0 0 0-7.86 1.36 10.8 10.8 0 0 0-5.45 4.72q-1.94 3.35-1.94 9.35v23.7Z"/>
+        <path d="M14.06 38.64a25.92 25.92 0 0 1 51.83 0V58.7L39.97 73.99 14.06 58.7ZM39.97 0A38.64 38.64 0 0 0 1.33 38.64v27.33l38.64 22.8 38.64-22.8V38.64A38.64 38.64 0 0 0 39.97 0"/>
+        <path d="M-.03 89.28V73.99l40 23.58 40-23.58v15.29l-40 23.58Z"/>
+      </svg>
+    </a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <div class="main-content">
+    <div class="content-wrapper">
+      <div class="credential-viewer">
+
+        <!-- CERTIFICATE DISPLAY (سيتم استبداله بصورة) -->
+        <div class="credential-frame-wrapper">
+          <!-- هنا حاوية الصورة التي ستظهر بعد التحويل -->
+          <div class="cert-image-container" id="certImageContainer">
+            <!-- ستوضع الصورة هنا ديناميكيًا -->
+            <p style="color:white; text-align:center; width:100%;"> </p>
+          </div>
+           <img src="./شهادة-صقر-حيدر.png" style="max-width:100%; height:auto;">
+          <!-- الشهادة الأصلية مخفية خارج الشاشة ليتم التقاطها -->
+          <div id="certSourceForCapture">
+            <!-- نعيد استخدام نفس التصميم السابق ولكن داخل div مخفي -->
+            <div style="background: linear-gradient(135deg, #0d1b2a 0%, #1a2a4a 60%, #0a3060 100%); padding: 32px 20px; display: flex; flex-direction: column; align-items: center;">
+              <div class="cert-card">
+                <div class="cert-logo-area">
+                  <div class="cert-logo-box">
+                    <span style="font-size:13px; font-weight:800; color:#e2c96e; letter-spacing:0;">A</span>
+                  </div>
+                  <div class="cert-logo-sub">ذكاء اصطناعي<br>من أجل الخليج<br><strong style="font-size:9px;">AI FOR GULF</strong></div>
+                </div>
+
+                <div class="cert-badge-label">شهادة مشاركة</div>
+                <div class="cert-title-main" style="<font-size:18></font-size:18>px; font-weight:700; margin-bottom:8px;">شهادة مشاركة</div>
+                <div class="cert-issued-to" style="font-size:12px; color:#666; margin-bottom:4px;">تشهد شركة ذكاء اصطناعي من أجل الخليج بأن</div>
+                <div class="cert-name">صقر حيدر</div>
+
+                <div class="cert-body-text">
+                  قد شارك(ت) بفاعلية في ورشة "أساسيات القيادة بالذكاء الاصطناعي" لمدة 8 ساعات تدريبية تناولت الورشة أساسيات كتابة الأوامر وإنشاء العروض التقديمية باستخدام الذكاء الاصطناعي بالإضافة إلى تطبيقات عملية على أدوات مثل <strong>NotebookLM</strong> و <strong>Google Gemini</strong>
+                </div>
+
+                <hr class="cert-divider">
+
+                <div class="cert-footer">
+                  <div class="cert-date">
+                    <span>تاريخ الإصدار</span>
+                    2026-04-16
+                  </div>
+                  <div class="cert-seal">
+                    <div class="cert-seal-circle">
+                      ذكاء اصطناعي<br>من أجل<br>الخليج
+                    </div>
+                  </div>
+                  <div class="cert-sig">
+                    <div style="font-size:13px; font-weight:600;">صقر حيدر </div>
+                    <div style="font-size:10px; color:#666;">مستشار وخبير في الذكاء<br>الاصطناعي</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom bar يبقى كما هو -->
+          <div class="cert-bottom-bar">
+            <svg width="80" height="20" viewBox="0 0 468.98 112.87" style="opacity:0.5;">
+              <path d="M135.24 93.43q-11.11 0-19.09-4.72a32.35 32.35 0 0 1-12.27-13.32 43.9 43.9 0 0 1-4.3-19.83 43.86 43.86 0 0 1 4.3-19.82 32.13 32.13 0 0 1 12.27-13.42q8-4.83 19.09-4.83 13.22 0 21.61 6.61t10.59 18.33h-14.79a15.47 15.47 0 0 0-5.87-9.34q-4.41-3.47-11.75-3.46-10.17 0-15.94 6.92t-5.77 19 5.77 19 15.94 6.82q7.35 0 11.75-3.15a14.9 14.9 0 0 0 5.87-8.92h14.79q-2.1 11.34-10.59 17.73t-21.61 6.4"/>
+              <path d="M14.06 38.64a25.92 25.92 0 0 1 51.83 0V58.7L39.97 73.99 14.06 58.7ZM39.97 0A38.64 38.64 0 0 0 1.33 38.64v27.33l38.64 22.8 38.64-22.8V38.64A38.64 38.64 0 0 0 39.97 0"/>
+              <path d="M-.03 89.28V73.99l40 23.58 40-23.58v15.29l-40 23.58Z"/>
+            </svg>
+            <span>تم توزيع من قِبل: <strong>Certifier</strong></span>
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL (بدون تغيير) -->
+        <div class="right-panel">
+
+          <!-- Recipient -->
+          <div class="card">
+            <div class="section-label">المستلم</div>
+            <h2 class="recipient-name">صقر حيدر</h2>
+          </div>
+
+          <!-- Actions -->
+          <div class="card">
+            <div class="btn-group">
+              <!-- Share button -->
+              <button class="btn btn-primary">
+                <svg class="icon" viewBox="64 64 896 896"><path d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120z"/></svg>
+                شارك جائزتك
+              </button>
+
+              <!-- LinkedIn -->
+              <button class="btn btn-outline">
+                <svg class="icon" viewBox="64 64 896 896"><path d="M847.7 112H176.3c-35.5 0-64.3 28.8-64.3 64.3v671.4c0 35.5 28.8 64.3 64.3 64.3h671.4c35.5 0 64.3-28.8 64.3-64.3V176.3c0-35.5-28.8-64.3-64.3-64.3zm0 736c-447.8-.1-671.7-.2-671.7-.3.1-447.8.2-671.7.3-671.7 447.8.1 671.7.2 671.7.3-.1 447.8-.2 671.7-.3 671.7zM230.6 411.9h118.7v381.8H230.6zm59.4-52.2c37.9 0 68.8-30.8 68.8-68.8a68.8 68.8 0 10-137.6 0c-.1 38 30.7 68.8 68.8 68.8zm252.3 245.1c0-49.8 9.5-98 71.2-98 60.8 0 61.7 56.9 61.7 101.2v185.7h118.6V584.3c0-102.8-22.2-181.9-142.3-181.9-57.7 0-96.4 31.7-112.3 61.7h-1.6v-52.2H423.7v381.8h118.6V604.8z"/></svg>
+                إضافة إلى ملفك الشخصي على LinkedIn
+              </button>
+
+              <!-- Download + QR row -->
+              <div class="btn-row">
+                <button class="btn btn-outline" id="downloadImageBtn">
+                  <svg class="icon" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"/></svg>
+                  تنزيل الصورة
+                </button>
+                <button class="btn btn-outline btn-icon-only">
+                  <svg class="icon" viewBox="64 64 896 896"><path d="M468 128H160c-17.7 0-32 14.3-32 32v308c0 4.4 3.6 8 8 8h332c4.4 0 8-3.6 8-8V136c0-4.4-3.6-8-8-8zm-56 284H192V192h220v220zm-138-74h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm194 210H136c-4.4 0-8 3.6-8 8v308c0 17.7 14.3 32 32 32h308c4.4 0 8-3.6 8-8V556c0-4.4-3.6-8-8-8zm-56 284H192V612h220v220zm-138-74h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm590-630H556c-4.4 0-8 3.6-8 8v332c0 4.4 3.6 8 8 8h332c4.4 0 8-3.6 8-8V160c0-17.7-14.3-32-32-32zm-32 284H612V192h220v220zm-138-74h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8z"/></svg>
+                </button>
+              </div>
+
+              <!-- Google Pay -->
+              <button class="btn-gpay">
+                <svg width="41" height="17" viewBox="0 0 41 17" fill="none">
+                  <path d="M19.526 2.635v4.083h2.518c.6 0 1.096-.202 1.488-.605.403-.402.605-.882.605-1.437 0-.544-.202-1.018-.605-1.422-.392-.403-.888-.605-1.488-.605h-2.518zm0 5.52v4.736h-1.504V1.198h3.99c1.013 0 1.873.337 2.582 1.012.72.675 1.08 1.497 1.08 2.466 0 .992-.36 1.819-1.08 2.482-.698.665-1.559.997-2.582.997h-2.486zM27.194 10.638c0 .392.166.718.499.98.332.26.722.391 1.168.391.633 0 1.196-.234 1.692-.703.497-.469.744-1.019.744-1.649-.469-.37-1.123-.555-1.962-.555-.61 0-1.12.148-1.528.444-.408.297-.613.657-.613 1.092m1.946-5.87c1.112 0 1.989.297 2.633.89.644.594.966 1.408.966 2.442v4.932h-1.438v-1.11h-.065c-.622.914-1.45 1.372-2.486 1.372-.882 0-1.621-.262-2.215-.784-.594-.523-.891-1.176-.891-1.96 0-.828.313-1.486.94-1.976s1.463-.735 2.507-.735c.892 0 1.629.163 2.21.49v-.344c0-.522-.207-.966-.621-1.33a2.132 2.132 0 0 0-1.455-.547c-.84 0-1.504.353-1.993 1.062l-1.324-.834c.73-1.045 1.81-1.568 3.232-1.568M40.47 5.03l-5.02 11.549h-1.553l1.864-4.03-3.302-7.52h1.635l2.387 5.76h.032l2.322-5.76z" fill="#3C4043"/>
+                  <path d="M13.382 7.822c0-.496-.042-.97-.12-1.422H6.836v2.691h3.656a3.124 3.124 0 0 1-1.353 2.048v1.693h2.19c1.28-1.18 2.02-2.918 2.02-4.97l-.968-.04z" fill="#4285F4"/>
+                  <path d="M6.834 13.7c1.833 0 3.37-.607 4.493-1.645l-2.19-1.695c-.606.407-1.38.647-2.302.647-1.77 0-3.27-1.195-3.804-2.801H.77v1.75A6.797 6.797 0 0 0 6.835 13.7" fill="#34A853"/>
+                  <path d="M3.03 8.206a4.03 4.03 0 0 1 0-2.573v-1.73H.77A6.7 6.7 0 0 0 .053 6.92c0 1.085.259 2.11.717 3.017l2.26-1.73z" fill="#FABB05"/>
+                  <path d="M6.834 2.832c.997 0 1.892.343 2.597 1.014l1.947-1.942A6.786 6.786 0 0 0 6.834.124a6.797 6.797 0 0 0-6.064 3.78L3.03 5.634c.534-1.594 2.03-2.802 3.804-2.802" fill="#E94235"/>
+                </svg>
+                <div style="width:1px; height:16px; background:#3C4043; margin:0 4px;"></div>
+                Save to phone
+              </button>
+
+              <!-- Report error -->
+              <div class="report-section" style="margin-top: 4px;">
+                <span class="report-text">هل ترغب في الإبلاغ عن خطأ إملائي أو خطأ في البرنامج؟</span>
+                <button class="btn btn-link">اتصال بالمُصدر</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Printed certificate banner -->
+          <div class="print-banner">
+            <div class="print-ribbon">اطلب</div>
+            <a href="#" style="text-decoration:none; color:inherit; display:block;">
+              <div class="print-inner">
+                <div class="print-text">
+                  <div class="print-title">اطلب شهادة ورقية</div>
+                  <div class="print-sub">احصل على شهادتك المطبوعة فرسلة إليك</div>
+                </div>
+                <div class="print-icon">
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Verify credentials -->
+          <div class="card">
+            <div class="verify-header">
+              <span class="verify-check">✓</span>
+              <span class="verify-title">التحقق من بيانات الاعتماد</span>
+            </div>
+            <div class="verify-date">
+              <strong>تاريخ الإصدار:</strong> 16 أبريل 2026
+            </div>
+            <button class="btn btn-outline" style="border-color: var(--primary); color: var(--primary);">
+              <svg class="icon" viewBox="64 64 896 896"><path d="M866.9 169.9L527.1 54.1C523 52.7 517.5 52 512 52s-11 .7-15.1 2.1L157.1 169.9c-8.3 2.8-15.1 12.4-15.1 21.2v482.4c0 8.8 5.7 20.4 12.6 25.9L499.3 968c3.5 2.7 8 4.1 12.6 4.1s9.2-1.4 12.6-4.1l344.7-268.6c6.9-5.4 12.6-17 12.6-25.9V191.1c.2-8.8-6.6-18.3-14.9-21.2zM810 654.3L512 886.5 214 654.3V226.7l298-101.6 298 101.6v427.6zm-405.8-201c-3-4.1-7.8-6.6-13-6.6H336c-6.5 0-10.3 7.4-6.5 12.7l126.4 174a16.1 16.1 0 0026 0l212.6-292.7c3.8-5.3 0-12.7-6.5-12.7h-55.2c-5.1 0-10 2.5-13 6.6L468.9 542.4l-64.7-89.1z"/></svg>
+              تحقق من بيانات الاعتماد
+            </button>
+            <div class="verify-id">
+              <strong>ID:</strong> a1ee8f89-8e60-4985-9296-d2867f7301fb
+            </div>
+          </div>
+
+          <!-- Issuer -->
+          <div class="card">
+            <div class="section-label">المُصدر</div>
+            <div class="issuer-name">AI for Gulf</div>
+          </div>
+
+          <!-- Description -->
+          <div class="card">
+            <h3 style="font-size:14px; font-weight:500; margin-bottom:8px;">الوصف</h3>
+            <p style="font-size:14px; color: var(--text-secondary);">لم يتم تقديم أي معلومات عن هذه الجائزة.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER (كما هي) -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="112" height="30" viewBox="0 0 468.98 112.87" fill="white">
+          <path d="M135.24 93.43q-11.11 0-19.09-4.72a32.35 32.35 0 0 1-12.27-13.32 43.9 43.9 0 0 1-4.3-19.83 43.86 43.86 0 0 1 4.3-19.82 32.13 32.13 0 0 1 12.27-13.42q8-4.83 19.09-4.83 13.22 0 21.61 6.61t10.59 18.33h-14.79a15.47 15.47 0 0 0-5.87-9.34q-4.41-3.47-11.75-3.46-10.17 0-15.94 6.92t-5.77 19 5.77 19 15.94 6.82q7.35 0 11.75-3.15a14.9 14.9 0 0 0 5.87-8.92h14.79q-2.1 11.34-10.59 17.73t-21.61 6.4M199.04 93.43a28.4 28.4 0 0 1-13.95-3.36 24.26 24.26 0 0 1-9.54-9.44 27.9 27.9 0 0 1-3.46-14.05 30.1 30.1 0 0 1 3.35-14.37 24.8 24.8 0 0 1 9.44-9.78 27.7 27.7 0 0 1 14.27-3.57 26.8 26.8 0 0 1 13.53 3.36 23.63 23.63 0 0 1 9.12 9.21 25.2 25.2 0 0 1 3.36 12.9c0 .77 0 1.58-.11 2.42s0 1.71-.1 2.62h-39.54a13.05 13.05 0 0 0 13.53 13 12.2 12.2 0 0 0 6.81-1.78 11.65 11.65 0 0 0 4.2-4.82h13.63a24.9 24.9 0 0 1-4.93 9 23.7 23.7 0 0 1-8.39 6.29 26.1 26.1 0 0 1-11.22 2.37m.11-43.63a14.12 14.12 0 0 0-8.71 2.83q-3.78 2.73-4.82 8.39h25.9a11.34 11.34 0 0 0-3.77-8.18 12.56 12.56 0 0 0-8.6-3.09ZM285.48 92.12q-8.19 0-13.11-4t-4.93-14.16V26.15h13.42v14h14.11v11.17h-14.11v22.76c0 2.52.53 4.26 1.57 5.24s3 1.37 5.67 1.37h6.5v11.43ZM308.43 32.02a8.68 8.68 0 0 1-6.08-2.2 7.36 7.36 0 0 1-2.31-5.56 7 7 0 0 1 2.31-5.45 8.68 8.68 0 0 1 6.08-2.21 8.3 8.3 0 0 1 6 2.21 6.87 6.87 0 0 1 2.41 5.45 7.2 7.2 0 0 1-2.41 5.56 8.3 8.3 0 0 1-6 2.2m-6.71 60.1v-52h13.43v52ZM328.42 92.12v-40.8h-7.13V40.1h7.13v-6.09q0-9.44 4.72-13.42t13-4h5.83v11.45h-3.67q-3.46 0-4.93 1.36t-1.47 4.61v6.09h31.46v52h-13.47V51.32h-18v40.8Zm38.28-59.47a8.68 8.68 0 0 1-6.08-2.2 7.36 7.36 0 0 1-2.31-5.56 7 7 0 0 1 2.31-5.46 8.68 8.68 0 0 1 6.08-2.21 8.3 8.3 0 0 1 6 2.21 6.86 6.86 0 0 1 2.42 5.45 7.21 7.21 0 0 1-2.44 5.55 8.3 8.3 0 0 1-5.98 2.22M405.45 93.43a28.4 28.4 0 0 1-14-3.36 24.3 24.3 0 0 1-9.48-9.49 27.9 27.9 0 0 1-3.46-14.05 30.1 30.1 0 0 1 3.35-14.37 24.8 24.8 0 0 1 9.43-9.73 27.7 27.7 0 0 1 14.27-3.57 26.8 26.8 0 0 1 13.53 3.36 23.63 23.63 0 0 1 9.12 9.21 25.2 25.2 0 0 1 3.36 12.9c0 .77 0 1.58-.11 2.42s0 1.71-.1 2.62h-39.54a13.05 13.05 0 0 0 13.53 13 12.17 12.17 0 0 0 6.81-1.78 11.65 11.65 0 0 0 4.2-4.82h13.61a24.7 24.7 0 0 1-4.93 9 23.7 23.7 0 0 1-8.39 6.29 26.1 26.1 0 0 1-11.2 2.37m.11-43.63a14.12 14.12 0 0 0-8.71 2.83q-3.78 2.73-4.82 8.39h25.94a11.34 11.34 0 0 0-3.77-8.18 12.56 12.56 0 0 0-8.64-3.09ZM436.57 92.12v-52h11.95l1.26 9.75a21.25 21.25 0 0 1 19.19-11V53h-3.77a21.3 21.3 0 0 0-7.87 1.36 10.83 10.83 0 0 0-5.45 4.72q-1.91 3.35-1.91 9.35v23.7ZM230.15 92.12v-52h12l1.26 9.75a21.22 21.22 0 0 1 19.19-11V53h-3.77a21.3 21.3 0 0 0-7.86 1.36 10.8 10.8 0 0 0-5.45 4.72q-1.94 3.35-1.94 9.35v23.7Z"/>
+          <path d="M14.06 38.64a25.92 25.92 0 0 1 51.83 0V58.7L39.97 73.99 14.06 58.7ZM39.97 0A38.64 38.64 0 0 0 1.33 38.64v27.33l38.64 22.8 38.64-22.8V38.64A38.64 38.64 0 0 0 39.97 0"/>
+          <path d="M-.03 89.28V73.99l40 23.58 40-23.58v15.29l-40 23.58Z"/>
+        </svg>
+        <p class="footer-tagline">أنشئ بيانات الاعتماد الرقمية وأرسلها إلى الجميع.</p>
+      </div>
+
+      <div>
+        <div class="footer-link-title">حول</div>
+        <a href="#" class="footer-link">قم بزيارة الموقع</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-lang">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Arabic ∨
+      </div>
+
+      <div class="footer-socials">
+        <a href="#" class="footer-social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" class="footer-social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" class="footer-social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+      </div>
+
+      <div class="powered-badge">
+        <span>Powered by</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="16" viewBox="0 0 468.98 112.87" fill="rgba(255,255,255,0.5)">
+          <path d="M135.24 93.43q-11.11 0-19.09-4.72a32.35 32.35 0 0 1-12.27-13.32 43.9 43.9 0 0 1-4.3-19.83 43.86 43.86 0 0 1 4.3-19.82 32.13 32.13 0 0 1 12.27-13.42q8-4.83 19.09-4.83 13.22 0 21.61 6.61t10.59 18.33h-14.79a15.47 15.47 0 0 0-5.87-9.34q-4.41-3.47-11.75-3.46-10.17 0-15.94 6.92t-5.77 19 5.77 19 15.94 6.82q7.35 0 11.75-3.15a14.9 14.9 0 0 0 5.87-8.92h14.79q-2.1 11.34-10.59 17.73t-21.61 6.4"/>
+          <path d="M14.06 38.64a25.92 25.92 0 0 1 51.83 0V58.7L39.97 73.99 14.06 58.7ZM39.97 0A38.64 38.64 0 0 0 1.33 38.64v27.33l38.64 22.8 38.64-22.8V38.64A38.64 38.64 0 0 0 39.97 0"/>
+          <path d="M-.03 89.28V73.99l40 23.58 40-23.58v15.29l-40 23.58Z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY BOTTOM BAR (mobile) -->
+<div class="sticky-bar">
+  <button class="btn btn-primary" style="font-size:15px;">
+    <svg class="icon" viewBox="64 64 896 896"><path d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120z"/></svg>
+    شارك جائزتك
+  </button>
+</div>
+
+<script>
+  (function() {
+    // عنصر المصدر الذي يحتوي على تصميم الشهادة
+    const sourceElement = document.querySelector('#certSourceForCapture > div'); // نأخذ الـ div الداخلي بالخلفية
+    const container = document.getElementById('certImageContainer');
+    
+    // دالة تحويل HTML إلى صورة وعرضها
+    async function generateCertificateImage() {
+      if (!sourceElement || !container) return;
+      
+      try {
+        // استخدام html2canvas مع خيارات لتحسين الجودة
+        const canvas = await html2canvas(sourceElement, {
+          scale: 2.5,                // دقة عالية
+          backgroundColor: null,      // خلفية شفافة (سيظهر التدرج من الخلفية)
+          allowTaint: false,
+          useCQRS: true,
+          logging: false
+        });
+        
+        // تحويل canvas إلى صورة
+        
+        
+        // إفراغ الحاوية وإضافة الصورة
+        container.innerHTML = '';
+        container.appendChild(img);
+        
+        // حفظ مرجع للصورة لاستخدامها في زر التحميل
+        window._certificateImageCanvas = canvas;
+        
+      } catch (error) {
+        console.error('فشل تحويل الشهادة إلى صورة:', error);
+        container.innerHTML = 
+      }
+    }
+    
+    // بدء التحويل بعد تحميل الصفحة
+    if (document.readyState === 'complete') {
+      generateCertificateImage();
+    } else {
+      window.addEventListener('load', generateCertificateImage);
+    }
+    
+    // ربط زر التحميل لتنزيل الصورة
+    const downloadBtn = document.getElementById('downloadImageBtn');
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (window._certificateImageCanvas) {
+          // إنشاء رابط تحميل
+          const link = document.createElement('a');
+          link.download = 'شهادة-صقر-حيدر.png';
+          link.href = window._certificateImageCanvas.toDataURL('image/png');
+          link.click();
+        } else {
+          alert('الصورة لم تجهز بعد، الرجاء الانتظار.');
+        }
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
